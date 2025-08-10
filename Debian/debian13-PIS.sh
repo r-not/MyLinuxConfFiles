@@ -32,6 +32,10 @@ echo "Downloading and installing deb-multimedia keyring..."
 sudo wget -qO /tmp/dmo-keyring.deb https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb && sudo dpkg -i /tmp/dmo-keyring.deb && echo -e "Types: deb\nURIs: https://www.deb-multimedia.org\nSuites: trixie\nComponents: main non-free\nSigned-By: /usr/share/keyrings/deb-multimedia-keyring.pgp\nEnabled: yes" | sudo tee /etc/apt/sources.list.d/dmo.sources >/dev/null
 sudo apt update && sudo apt install -y vlc ffmpeg libavcodec-extra libdvdcss2 gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly audacious audacious-plugins handbrake-gtk kodi
 
+echo -e "${GREEN}=== Installing Localsend ===${NC}"
+wget -O localsend.deb https://github.com/localsend/localsend/releases/download/v1.17.0/LocalSend-1.17.0-linux-x86-64.deb;dpkg -i localsend.deb 
+
+
 echo -e "${GREEN}=== Tweaking Login Greeter ===${NC}"
 sudo grep -q '^greeter-hide-users=' /usr/share/lightdm/lightdm.conf.d/01_debian.conf && sudo sed -i 's/^greeter-hide-users=.*/greeter-hide-users=false/' /usr/share/lightdm/lightdm.conf.d/01_debian.conf || echo "greeter-hide-users=false" | sudo tee -a /usr/share/lightdm/lightdm.conf.d/01_debian.conf
 
