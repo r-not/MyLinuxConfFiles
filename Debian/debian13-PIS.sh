@@ -46,7 +46,7 @@ sudo cd /tmp;wget --no-check-certificate https://github.com/r-not/unibnfonts/arc
 cd /tmp;wget --no-check-certificate https://raw.githubusercontent.com/r-not/MyLinuxConfFiles/refs/heads/master/Common-Configs/bn-font-set.sh -O bn-font-set.sh;sh ./bn-font-set.sh
 
 echo -e "${GREEN}=== Installing Browsers ===${NC}"
-sudo apt install -y firefox chromium
+sudo apt install -y chromium
 curl -fsS https://dl.brave.com/install.sh | sh
 
 echo -e "${GREEN}=== Installing Power Management Tools ===${NC}"
