@@ -7,7 +7,7 @@ YELLOW="\e[33m"
 NC="\e[0m"
 
 echo "${GREEN}=== Updating System ===${NC}"
-sudo apt update && sudo apt full-upgrade -y
+sudo apt update && sudo apt install -y netselect-apt && netselect-apt && sudo apt full-upgrade -y
 sudo apt autoremove --purge -y
 
 echo "${GREEN}=== Enabling Non-Free Firmware ===${NC}"
