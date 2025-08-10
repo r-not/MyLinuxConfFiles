@@ -40,7 +40,7 @@ if [ -f "$FONT_FILE" ]; then
         echo
         echo "👌 Keeping the existing Kalpurush font."
         echo
-	exit 0
+	exit 1
     elif [ "$user_choice" != "2" ]; then
         echo
         echo "❌ Invalid choice. Please run the script again and choose 'keep' or 'install'."
