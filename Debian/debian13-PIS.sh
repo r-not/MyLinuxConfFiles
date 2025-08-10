@@ -18,11 +18,11 @@ sudo apt update
 echo "${GREEN}=== Installing General Firmware ===${NC}"
 sudo apt install -y firmware-linux firmware-linux-nonfree firmware-misc-nonfree dkms linux-headers-$(uname -r) intel-microcode amd64-microcode
     
-echo -e "${GREEN}=== Installing Intel Graphics Drivers ===${NC}"
-sudo apt install -y xserver-xorg-video-intel mesa-utils libva-intel-driver intel-media-va-driver vainfo
+#echo -e "${GREEN}=== Installing Intel Graphics Drivers ===${NC}"
+#sudo apt install -y xserver-xorg-video-intel mesa-utils libva-intel-driver intel-media-va-driver vainfo
 
-echo -e "${GREEN}=== Installing AMD Graphics Drivers ===${NC}"
-sudo apt install -y xserver-xorg-video-amdgpu mesa-vulkan-drivers mesa-utils vainfo firmware-amd-graphics
+#echo -e "${GREEN}=== Installing AMD Graphics Drivers ===${NC}"
+#sudo apt install -y xserver-xorg-video-amdgpu mesa-vulkan-drivers mesa-utils vainfo firmware-amd-graphics
 
 echo -e "${GREEN}=== Installing Essentials ===${NC}"
 sudo apt install -y curl wget git build-essential gnome-software synaptic gdebi gparted gnome-disk-utility apt-xapian-index policykit-1-gnome libfuse2 libreoffice libreoffice-impress libreoffice-writer libreoffice-calc celluloid rhythmbox
@@ -60,8 +60,7 @@ Package: *
 Pin: origin packages.mozilla.org
 Pin-Priority: 1000
 ' | sudo tee /etc/apt/preferences.d/mozilla
-sudo apt update && sudo apt install firefox firefox-l10n-bn
-sudo apt install -y chromium
+sudo apt update && sudo apt install -y firefox firefox-l10n-bn chromium
 curl -fsS https://dl.brave.com/install.sh | sh
 
 echo -e "${GREEN}=== Installing Power Management Tools ===${NC}"
