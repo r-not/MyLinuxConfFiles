@@ -36,9 +36,10 @@ sudo grep -q '^greeter-hide-users=' /usr/share/lightdm/lightdm.conf.d/01_debian.
 echo -e "${GREEN}=== Installing Cinnamon Themes ===${NC}"
 wget http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_1.8.3_all.deb
 wget http://packages.linuxmint.com/pool/main/m/mint-x-icons/mint-x-icons_1.5.3_all.deb
-wget http://packages.linuxmint.com/pool/main/m/mint-y-icons/mint-y-icons_1.3.7_all.deb
+sudo apt install -y mint-y-icons
+#wget http://packages.linuxmint.com/pool/main/m/mint-y-icons/mint-y-icons_1.3.7_all.deb
 sudo dpkg -i mint-themes_1.8.3_all.deb mint-x-icons_1.5.3_all.deb mint-y-icons_1.3.7_all.deb
-rm -rf mint-themes_1.8.3_all.* mint-x-icons_1.5.3_all.* mint-y-icons_1.3.7_all.*
+rm -rf mint-themes_1.8.3_all.* mint-x-icons_1.5.3_all.*
 
 echo -e "${GREEN}=== Installing Fonts ===${NC}"
 sudo apt install -y fonts-noto fonts-noto-color-emoji fonts-noto-extra fonts-noto-unhinted    
@@ -46,6 +47,20 @@ sudo cd /tmp;wget --no-check-certificate https://github.com/r-not/unibnfonts/arc
 cd /tmp;wget --no-check-certificate https://raw.githubusercontent.com/r-not/MyLinuxConfFiles/refs/heads/master/Common-Configs/bn-font-set.sh -O bn-font-set.sh;sh ./bn-font-set.sh
 
 echo -e "${GREEN}=== Installing Browsers ===${NC}"
+sudo apt remove --purge firefix-esr*
+sudo install -d -m 0755 /etc/apt/keyrings
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
+gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nThe key fingerprint matches ("$0").\n"; else print "\nVerification failed: the fingerprint ("$0") does not match the expected one.\n"}'
+FILE="/etc/apt/sources.list.d/mozilla.list"
+LINE='deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main'
+sudo touch "$FILE"
+grep -qxF "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE" > /dev/null
+echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
+sudo apt update && sudo apt install firefox firefox-l10n-bn
 sudo apt install -y chromium
 curl -fsS https://dl.brave.com/install.sh | sh
 
