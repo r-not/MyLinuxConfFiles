@@ -16,7 +16,7 @@ sudo sed -i 's/main contrib$/main contrib non-free-firmware/' /etc/apt/sources.l
 sudo apt update
 
 echo "${GREEN}=== Installing General Firmware ===${NC}"
-sudo apt install -y firmware-linux firmware-linux-nonfree firmware-misc-nonfree dkms linux-headers-$(uname -r) intel-microcode amd64-microcode
+sudo apt install -y firmware-linux firmware-linux-nonfree firmware-misc-nonfree dkms linux-headers-$(uname -r) intel-microcode amd64-microcode mesa-utils
     
 #echo -e "${GREEN}=== Installing Intel Graphics Drivers ===${NC}"
 #sudo apt install -y xserver-xorg-video-intel mesa-utils libva-intel-driver intel-media-va-driver vainfo
@@ -25,10 +25,12 @@ sudo apt install -y firmware-linux firmware-linux-nonfree firmware-misc-nonfree 
 #sudo apt install -y xserver-xorg-video-amdgpu mesa-vulkan-drivers mesa-utils vainfo firmware-amd-graphics
 
 echo -e "${GREEN}=== Installing Essentials ===${NC}"
-sudo apt install -y curl wget git build-essential gnome-software synaptic gdebi gparted gnome-disk-utility apt-xapian-index policykit-1-gnome libfuse2 libreoffice libreoffice-impress libreoffice-writer libreoffice-calc celluloid rhythmbox
+sudo apt install -y curl wget git build-essential gnome-software synaptic gdebi gparted gnome-disk-utility apt-xapian-index policykit-1-gnome libfuse2 libreoffice libreoffice-impress libreoffice-writer libreoffice-calc celluloid rhythmbox gimp gimp-data gimp-data-extras inkscape bleachbit gedit gedit-plugins gedit-plugins-common
 
 echo -e "${GREEN}=== Installing Multimedia Codecs ===${NC}"
-sudo apt install -y vlc ffmpeg libavcodec-extra
+echo "Downloading and installing deb-multimedia keyring..."
+sudo wget -qO /tmp/dmo-keyring.deb https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb && sudo dpkg -i /tmp/dmo-keyring.deb && echo -e "Types: deb\nURIs: https://www.deb-multimedia.org\nSuites: trixie\nComponents: main non-free\nSigned-By: /usr/share/keyrings/deb-multimedia-keyring.pgp\nEnabled: yes" | sudo tee /etc/apt/sources.list.d/dmo.sources >/dev/null
+sudo apt update && sudo apt install -y vlc ffmpeg libavcodec-extra libdvdcss2 gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly audacious audacious-plugins handbrake-gtk kodi
 
 echo -e "${GREEN}=== Tweaking Login Greeter ===${NC}"
 sudo grep -q '^greeter-hide-users=' /usr/share/lightdm/lightdm.conf.d/01_debian.conf && sudo sed -i 's/^greeter-hide-users=.*/greeter-hide-users=false/' /usr/share/lightdm/lightdm.conf.d/01_debian.conf || echo "greeter-hide-users=false" | sudo tee -a /usr/share/lightdm/lightdm.conf.d/01_debian.conf
