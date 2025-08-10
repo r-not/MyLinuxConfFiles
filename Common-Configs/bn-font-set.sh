@@ -19,58 +19,6 @@ FONT_FILE="$FONTS_DIR/kalpurush.ttf"
 echo
 echo "🚀 Starting system-wide sparkle Bangla font setup process...."
 
-# Check and create .local/share/fonts directory if it doesn't exist
-echo
-if [ -d "$FONTS_DIR" ]; then
-    echo "✅ Fonts directory already exists at $FONTS_DIR"
-else
-    echo "📁 Creating new fonts directory at $FONTS_DIR"
-    mkdir -p "$FONTS_DIR"
-fi
-
-# Check if kalpurush.ttf already exists
-if [ -f "$FONT_FILE" ]; then
-    echo
-    echo "⚠️ Existing Kalpurush font found at $FONTS_DIR"
-    echo
-    echo "🤔 Do you want to keep the existing font or install the new one?"
-    echo "  Type '1' to keep the old font or '2' to replace it:"
-    read -r user_choice
-    if [ "$user_choice" = "1" ]; then
-        echo
-        echo "👌 Keeping the existing Kalpurush font."
-        echo
-	//exit 0
-    elif [ "$user_choice" != "2" ]; then
-        echo
-        echo "❌ Invalid choice. Please run the script again and choose 'keep' or 'install'."
-        exit 1
-    fi
-fi
-
-# Download the kalpurush.ttf file from GitHub
-echo
-echo "🌐 Downloading kalpurush.ttf from GitHub..."
-if curl -L -o "$FONT_FILE" "$FONT_URL"; then
-    echo
-    echo "🎉 Success! The Kalpurush font has been downloaded to $FONTS_DIR"
-else
-    echo
-    echo "❌ Error: Failed to download Kalpurush font"
-    exit 1
-fi
-
-# Verify the kalpurush.ttf file was downloaded
-if [ -f "$FONT_FILE" ]; then
-    echo
-    echo "✔️ File verified: Kalpurush font is ready to roll!"
-else
-    echo
-    echo "❌ Error: File verification failed!!"
-    exit 1
-fi
-
-
 # Check and create .config/fontconfig directory if it doesn't exist
 echo
 if [ -d "$CONFIG_DIR" ]; then
@@ -110,5 +58,57 @@ else
     echo "❌ Error: File verification failed for fonts.conf"
     exit 1
 fi
+
+# Check and create .local/share/fonts directory if it doesn't exist
+echo
+if [ -d "$FONTS_DIR" ]; then
+    echo "✅ Fonts directory already exists at $FONTS_DIR"
+else
+    echo "📁 Creating new fonts directory at $FONTS_DIR"
+    mkdir -p "$FONTS_DIR"
+fi
+
+# Check if kalpurush.ttf already exists
+if [ -f "$FONT_FILE" ]; then
+    echo
+    echo "⚠️ Existing Kalpurush font found at $FONTS_DIR"
+    echo
+    echo "🤔 Do you want to keep the existing font or install the new one?"
+    echo "  Type '1' to keep the old font or '2' to replace it:"
+    read -r user_choice
+    if [ "$user_choice" = "1" ]; then
+        echo
+        echo "👌 Keeping the existing Kalpurush font."
+        echo
+	exit 0
+    elif [ "$user_choice" != "2" ]; then
+        echo
+        echo "❌ Invalid choice. Please run the script again and choose 'keep' or 'install'."
+        exit 1
+    fi
+fi
+
+# Download the kalpurush.ttf file from GitHub
+echo
+echo "🌐 Downloading kalpurush.ttf from GitHub..."
+if curl -L -o "$FONT_FILE" "$FONT_URL"; then
+    echo
+    echo "🎉 Success! The Kalpurush font has been downloaded to $FONTS_DIR"
+else
+    echo
+    echo "❌ Error: Failed to download Kalpurush font"
+    exit 1
+fi
+
+# Verify the kalpurush.ttf file was downloaded
+if [ -f "$FONT_FILE" ]; then
+    echo
+    echo "✔️ File verified: Kalpurush font is ready to roll!"
+else
+    echo
+    echo "❌ Error: File verification failed!!"
+    exit 1
+fi
+
 echo
 echo "🏁 All done! System-wide sparkle Bangla font setup is complete."
