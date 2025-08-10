@@ -1,0 +1,63 @@
+#!/bin/bash
+# Debian 13 Cinnamon Post-Install Script with Menu
+# Run: bash debian13_setup.sh
+
+GREEN="\e[32m"
+YELLOW="\e[33m"
+NC="\e[0m"
+
+echo "${GREEN}=== Updating System ===${NC}"
+sudo apt update && sudo apt full-upgrade -y
+sudo apt autoremove --purge -y
+
+echo "${GREEN}=== Enabling Non-Free Firmware ===${NC}"
+sudo sed -i 's/main$/main contrib non-free-firmware/' /etc/apt/sources.list
+sudo sed -i 's/main contrib$/main contrib non-free-firmware/' /etc/apt/sources.list
+sudo apt update
+
+echo "${GREEN}=== Installing General Firmware ===${NC}"
+sudo apt install -y firmware-linux firmware-linux-nonfree firmware-misc-nonfree dkms linux-headers-$(uname -r) intel-microcode amd64-microcode
+    
+echo -e "${GREEN}=== Installing Intel Graphics Drivers ===${NC}"
+sudo apt install -y xserver-xorg-video-intel mesa-utils libva-intel-driver intel-media-va-driver vainfo
+
+echo -e "${GREEN}=== Installing AMD Graphics Drivers ===${NC}"
+sudo apt install -y xserver-xorg-video-amdgpu mesa-vulkan-drivers mesa-utils vainfo firmware-amd-graphics
+
+echo -e "${GREEN}=== Installing Essentials ===${NC}"
+sudo apt install -y curl wget git build-essential gnome-software synaptic gdebi gparted gnome-disk-utility apt-xapian-index policykit-1-gnome libfuse2 libreoffice libreoffice-impress libreoffice-writer libreoffice-calc celluloid rhythmbox
+
+echo -e "${GREEN}=== Installing Multimedia Codecs ===${NC}"
+sudo apt install -y vlc ffmpeg libavcodec-extra
+
+echo -e "${GREEN}=== Installing Cinnamon Themes ===${NC}"
+wget http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_1.8.3_all.deb
+wget http://packages.linuxmint.com/pool/main/m/mint-x-icons/mint-x-icons_1.5.3_all.deb
+wget http://packages.linuxmint.com/pool/main/m/mint-y-icons/mint-y-icons_1.3.7_all.deb
+sudo dpkg -i mint-themes_1.8.3_all.deb mint-x-icons_1.5.3_all.deb mint-y-icons_1.3.7_all.deb
+rm -rf mint-themes_1.8.3_all.deb mint-x-icons_1.5.3_all.deb mint-y-icons_1.3.7_all.deb
+#sudo apt install -y mint-themes mint-y-icons
+
+echo -e "${GREEN}=== Installing Fonts ===${NC}"
+sudo apt install -y fonts-noto fonts-noto-color-emoji fonts-noto-extra fonts-noto-unhinted    
+sudo cd /tmp;wget --no-check-certificate https://github.com/r-not/unibnfonts/archive/master.tar.gz -O ubf.tar.gz;sudo tar -xvf ubf.tar.gz -C /usr/share/fonts/;rm ubf.tar.gz
+cd /tmp;wget --no-check-certificate https://raw.githubusercontent.com/r-not/MyLinuxConfFiles/refs/heads/master/Common-Configs/bn-font-set.sh -O bn-font-set.sh;sh ./bn-font-set.sh
+
+echo -e "${GREEN}=== Installing Browsers ===${NC}"
+sudo apt install -y firefox chromium
+curl -fsS https://dl.brave.com/install.sh | sh
+
+echo -e "${GREEN}=== Installing Power Management Tools ===${NC}"
+sudo apt install -y tlp tlp-rdw
+sudo systemctl enable tlp
+
+echo -e "${GREEN}=== Installing Timeshift (Backup Tool) ===${NC}"
+sudo apt install -y timeshift
+
+echo -e "${GREEN}=== Enabling Flatpak ===${NC}"
+sudo apt install -y flatpak gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+echo -e "${GREEN}=== Installing & Enabling Firewall (UFW) ===${NC}"
+sudo apt install -y ufw gufw
+sudo ufw status | grep -q "Status: active" || { sudo ufw --force enable && sudo systemctl enable --now ufw; }
