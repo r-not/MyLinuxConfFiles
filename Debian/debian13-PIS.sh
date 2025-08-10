@@ -30,13 +30,15 @@ sudo apt install -y curl wget git build-essential gnome-software synaptic gdebi 
 echo -e "${GREEN}=== Installing Multimedia Codecs ===${NC}"
 sudo apt install -y vlc ffmpeg libavcodec-extra
 
+echo -e "${GREEN}=== Tweaking Login Greeter ===${NC}"
+sudo grep -q '^greeter-hide-users=' /usr/share/lightdm/lightdm.conf.d/01_debian.conf && sudo sed -i 's/^greeter-hide-users=.*/greeter-hide-users=false/' /usr/share/lightdm/lightdm.conf.d/01_debian.conf || echo "greeter-hide-users=false" | sudo tee -a /usr/share/lightdm/lightdm.conf.d/01_debian.conf
+
 echo -e "${GREEN}=== Installing Cinnamon Themes ===${NC}"
 wget http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_1.8.3_all.deb
 wget http://packages.linuxmint.com/pool/main/m/mint-x-icons/mint-x-icons_1.5.3_all.deb
 wget http://packages.linuxmint.com/pool/main/m/mint-y-icons/mint-y-icons_1.3.7_all.deb
 sudo dpkg -i mint-themes_1.8.3_all.deb mint-x-icons_1.5.3_all.deb mint-y-icons_1.3.7_all.deb
-rm -rf mint-themes_1.8.3_all.deb mint-x-icons_1.5.3_all.deb mint-y-icons_1.3.7_all.deb
-#sudo apt install -y mint-themes mint-y-icons
+rm -rf mint-themes_1.8.3_all.* mint-x-icons_1.5.3_all.* mint-y-icons_1.3.7_all.*
 
 echo -e "${GREEN}=== Installing Fonts ===${NC}"
 sudo apt install -y fonts-noto fonts-noto-color-emoji fonts-noto-extra fonts-noto-unhinted    
