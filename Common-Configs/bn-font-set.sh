@@ -93,6 +93,8 @@ echo
 echo "🌐 Downloading kalpurush.ttf from GitHub..."
 if curl -L -o "$FONT_FILE" "$FONT_URL"; then
     echo
+	echo "Refreshing font cache..."
+ 	fc-cache -fv > /dev/null 2>&1
     echo "🎉 Success! The Kalpurush font has been downloaded to $FONTS_DIR"
 else
     echo
