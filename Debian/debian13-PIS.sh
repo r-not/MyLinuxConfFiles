@@ -32,7 +32,7 @@ sudo apt install -y libreoffice libreoffice-impress libreoffice-writer libreoffi
 
 echo -e "${GREEN}=== Installing Multimedia Codecs ===${NC}"
 echo "Downloading and installing deb-multimedia keyring..."
-sudo wget -qO /tmp/dmo-keyring.deb https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb && sudo dpkg -i /tmp/dmo-keyring.deb && echo -e "Types: deb\nURIs: https://www.deb-multimedia.org\nSuites: trixie\nComponents: main non-free\nSigned-By: /usr/share/keyrings/deb-multimedia-keyring.pgp\nEnabled: yes" | sudo tee /etc/apt/sources.list.d/dmo.sources >/dev/null
+sudo wget -qO /tmp/dmo-keyring.deb https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb && sudo dpkg -i /tmp/dmo-keyring.deb && echo "Types: deb\nURIs: https://www.deb-multimedia.org\nSuites: trixie\nComponents: main non-free\nSigned-By: /usr/share/keyrings/deb-multimedia-keyring.pgp\nEnabled: yes" | sudo tee /etc/apt/sources.list.d/dmo.sources >/dev/null
 sudo apt update && sudo apt install -y vlc ffmpeg libavcodec-extra libdvdcss2 gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly audacious audacious-plugins handbrake-gtk kodi
 
 echo -e "${GREEN}=== Installing Localsend ===${NC}"
