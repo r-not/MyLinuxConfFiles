@@ -32,7 +32,7 @@ echo "${GREEN}=== Installing Essentials ===${NC}"
 sudo nala install -y curl wget git build-essential gnome-software synaptic gdebi gparted gnome-disk-utility libfuse2 
 
 echo "${GREEN}=== Installing Additional Packages ===${NC}"
-sudo nala install -y libreoffice libreoffice-impress libreoffice-writer libreoffice-calc celluloid rhythmbox gimp gimp-data gimp-data-extras inkscape bleachbit gedit gedit-plugins gedit-plugins-common nala p7zip p7zip-full unzip
+sudo nala install -y libreoffice libreoffice-impress libreoffice-writer libreoffice-calc celluloid rhythmbox gimp gimp-data gimp-data-extras inkscape bleachbit gedit gedit-plugins gedit-plugins-common p7zip p7zip-full unzip
 
 echo "${GREEN}=== Installing Multimedia Codecs ===${NC}"
 echo "Downloading and installing deb-multimedia keyring..."
