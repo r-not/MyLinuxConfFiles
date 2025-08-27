@@ -37,7 +37,7 @@ sudo apt update && sudo apt install -y vlc ffmpeg libavcodec-extra libdvdcss2 gs
 
 echo -e "${GREEN}=== Installing Localsend ===${NC}"
 wget -O localsend.deb https://github.com/localsend/localsend/releases/download/v1.17.0/LocalSend-1.17.0-linux-x86-64.deb;dpkg -i localsend.deb 
-
+rm -rf localsend*.deb
 
 echo -e "${GREEN}=== Tweaking Login Greeter ===${NC}"
 sudo grep -q '^greeter-hide-users=' /usr/share/lightdm/lightdm.conf.d/01_debian.conf && sudo sed -i 's/^greeter-hide-users=.*/greeter-hide-users=false/' /usr/share/lightdm/lightdm.conf.d/01_debian.conf || echo "greeter-hide-users=false" | sudo tee -a /usr/share/lightdm/lightdm.conf.d/01_debian.conf
@@ -47,7 +47,7 @@ wget http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_1.8.3_all
 wget http://packages.linuxmint.com/pool/main/m/mint-x-icons/mint-x-icons_1.5.3_all.deb
 sudo apt install -y mint-y-icons
 #wget http://packages.linuxmint.com/pool/main/m/mint-y-icons/mint-y-icons_1.3.7_all.deb
-sudo dpkg -i mint-themes_1.8.3_all.deb mint-x-icons_1.5.3_all.deb mint-y-icons_1.3.7_all.deb
+sudo dpkg -i *.deb
 rm -rf mint-themes_1.8.3_all.* mint-x-icons_1.5.3_all.*
 
 echo -e "${GREEN}=== Installing Fonts ===${NC}"
