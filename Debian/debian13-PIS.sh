@@ -53,6 +53,12 @@ sudo apt install -y mint-y-icons
 sudo dpkg -i *.deb
 rm -rf mint-*.deb
 
+echo "${GREEN}=== Tweaking Cinnamon Date & Time settings ===${NC}"
+timedatectl set-timezone Asia/Dhaka
+timedatectl set-ntp true
+gsettings set org.cinnamon.desktop.interface clock-show-date true
+gsettings set org.cinnamon.desktop.interface clock-use-24h false
+
 echo "${GREEN}=== Installing Fonts ===${NC}"
 sudo apt install -y fonts-noto fonts-noto-color-emoji fonts-noto-extra fonts-noto-unhinted    
 sudo cd /tmp;wget --no-check-certificate https://github.com/r-not/unibnfonts/archive/master.tar.gz -O ubf.tar.gz;sudo tar -xvf ubf.tar.gz -C /usr/share/fonts/;rm ubf.tar.gz
