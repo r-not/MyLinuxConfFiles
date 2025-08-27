@@ -48,7 +48,7 @@ wget http://packages.linuxmint.com/pool/main/m/mint-x-icons/mint-x-icons_1.5.3_a
 sudo apt install -y mint-y-icons
 #wget http://packages.linuxmint.com/pool/main/m/mint-y-icons/mint-y-icons_1.3.7_all.deb
 sudo dpkg -i *.deb
-rm -rf mint-themes_1.8.3_all.* mint-x-icons_1.5.3_all.*
+rm -rf mint-*.deb
 
 echo -e "${GREEN}=== Installing Fonts ===${NC}"
 sudo apt install -y fonts-noto fonts-noto-color-emoji fonts-noto-extra fonts-noto-unhinted    
