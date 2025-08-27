@@ -56,7 +56,7 @@ sudo cd /tmp;wget --no-check-certificate https://github.com/r-not/unibnfonts/arc
 cd /tmp;wget --no-check-certificate https://raw.githubusercontent.com/r-not/MyLinuxConfFiles/refs/heads/master/Common-Configs/bn-font-set.sh -O bn-font-set.sh;sh ./bn-font-set.sh
 
 echo -e "${GREEN}=== Installing Browsers ===${NC}"
-sudo apt remove --purge firefix-esr*
+sudo apt remove --purge -y firefox-esr*
 sudo install -d -m 0755 /etc/apt/keyrings
 wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null
 gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nThe key fingerprint matches ("$0").\n"; else print "\nVerification failed: the fingerprint ("$0") does not match the expected one.\n"}'
