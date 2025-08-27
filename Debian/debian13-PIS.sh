@@ -1,6 +1,9 @@
 #!/bin/bash
-# Debian 13 Cinnamon Post-Install Script with Menu
-# Run: bash debian13_setup.sh
+##############################################################
+# Debian 13 (Cinnamon) | Post-Install Script
+# Author: N. Razib
+# Created on: August 27, 2025
+##############################################################
 
 GREEN="\e[32m"
 YELLOW="\e[33m"
