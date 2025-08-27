@@ -25,7 +25,7 @@ sudo apt install -y firmware-linux firmware-linux-nonfree firmware-misc-nonfree 
 #sudo apt install -y xserver-xorg-video-amdgpu mesa-vulkan-drivers mesa-utils vainfo firmware-amd-graphics
 
 echo -e "${GREEN}=== Installing Essentials ===${NC}"
-sudo apt install -y curl wget git build-essential gnome-software synaptic gdebi gparted gnome-disk-utility apt-xapian-index policykit-1-gnome libfuse2 
+sudo apt install -y curl wget git build-essential gnome-software synaptic gdebi gparted gnome-disk-utility libfuse2 
 
 echo -e "${GREEN}=== Installing Additional Packages ===${NC}"
 sudo apt install -y libreoffice libreoffice-impress libreoffice-writer libreoffice-calc celluloid rhythmbox gimp gimp-data gimp-data-extras inkscape bleachbit gedit gedit-plugins gedit-plugins-common nala p7zip p7zip-full unzip
