@@ -54,6 +54,13 @@ sudo dpkg -i *.deb
 rm -rf mint-*.deb
 ```
 
+**Tweaking Cinnamon Date & Time settings**
+``` bash
+timedatectl set-timezone Asia/Dhaka
+timedatectl set-ntp true
+gsettings set org.cinnamon.desktop.interface clock-show-date true
+gsettings set org.cinnamon.desktop.interface clock-use-24h false
+```
 
 **Installing Fonts**
 ``` bash
