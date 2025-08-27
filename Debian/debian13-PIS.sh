@@ -1,7 +1,7 @@
 #!/bin/bash
 ##############################################################
 # Debian 13 (Cinnamon) | Post-Install Script
-# Author: N. Razib
+# Author: R!
 # Created on: August 27, 2025
 ##############################################################
 
